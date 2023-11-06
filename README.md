@@ -133,7 +133,7 @@ An Example History with Embedded Record:
 
 
 ## Site map
-![site map](documentation/sitemap.jpg)
+![site_map](documentation/sitemap.jpg)
 
 
 ## User Stories or Use Cases
