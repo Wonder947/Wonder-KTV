@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Wonder KTV',
@@ -13,7 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div>
+          <Link href='/search'>Search</Link>
+        </div>
+        {children}
+      </body>
     </html>
   )
 }
