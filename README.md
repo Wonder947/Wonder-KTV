@@ -152,15 +152,20 @@ An Example History with Embedded Record:
 
 * (2 points) Integrate YoutubeAPI
     * I'm going to be using YoutubeApi for video search and video playing
-* (6 points) Explore React.js
-    * explore react.js functionalities
-    * integrate some of the functions into my app to make it more interactive
-* (4 points) Explore some client-side Javascript libraries
-    * entend my views and enlarge my tool set
-    * integrate some of them into my web app
-* (2 points) Perform client-side form validation
-    * this is repeated as the example, but i want to try it
-    * points will be adjusted based on my work on it
+    * to integrate it, i need to understand what are they, how they work, and how to use them
+    * i need to design my app carefully to reduce api calls by find some way to save the data internally
+* (6 points) Explore React.js and Next.js
+    * explore react.js and Next.js functionalities
+    * I'm going to build my full-stack app solely on Next.js
+    * this requiring self learning React.js, Next.js using App router, some Typescript
+    * as well as the overall understanding of Next.js
+    * which takes me a great amount of time, worthing 6 points
+* (2 points) Deploy on Vervel
+  * I explore the deployment procedure, and get my app deployed on Vercel
+  * I get a domain of my own and redirect my vercel deployment to that (ktv.wonder947.com)
+* (TBD: 2 points) Perform client-side form validation
+    * this is repeated as the example, and maybe i will try it
+* (tbd) Explore some other libraries
 
 
 ## [Link to Initial Main Project File](app.mjs) 
@@ -169,4 +174,6 @@ An Example History with Embedded Record:
 ## Annotations / References Used
 
 1. [tutorial on React.js](https://react.dev/learn)
+2. [form tutorial on Next.js App router](https://nextjs.org/docs/app/building-your-application/data-fetching/forms-and-mutations)
+3. [tutorial on Next.js + App router + Mongodb + User Rego and login with example](https://jasonwatmore.com/next-js-13-app-router-mongodb-user-rego-and-login-tutorial-with-example)
 
