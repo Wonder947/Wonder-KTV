@@ -16,7 +16,7 @@ export async function addSong(formData: FormData){
 }
 
 export async function deleteSong(formData: FormData){
-    // await dbConnect()
+    await dbConnect()
     await songModel.findByIdAndDelete(formData.get('songid'))
     console.log("!!!!!!deleted song", formData.get('songid'))
     revalidatePath('/search')
