@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dbConnect from "@/lib/dbConnect";
+import { ObjectId } from "mongodb";
 
 dbConnect()
 
@@ -7,12 +8,13 @@ console.log("!!!!!!called from ./lib/models.ts")
 
 //here are my interfaces
 export interface IntSong{
+    id: string
     name: string
 }
 
 
 //here are my schemas
-const SongSchema = new mongoose.Schema({
+export const SongSchema = new mongoose.Schema({
     name: String
 })
 
@@ -27,14 +29,8 @@ const Review = new mongoose.Schema({
 
 
 // here are my models
-export const reviewModel = mongoose.models.Review || mongoose.model("Review", Review)
-export const songModel = mongoose.models.Song || mongoose.model("Song", SongSchema)
-
-
-// export const Review_m = mongoose.model("Review")
-
-
-
+// export const songModel = mongoose.models.Song || mongoose.model("Song", SongSchema)
+export const songModel = mongoose.model('Song') || mongoose.model('Song', SongSchema)
 
 // export interface Songs extends mongoose.Document{
 //     name: string
