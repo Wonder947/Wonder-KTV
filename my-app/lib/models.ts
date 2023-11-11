@@ -29,8 +29,8 @@ const Review = new mongoose.Schema({
 
 
 // here are my models
-// export const songModel = mongoose.models.Song || mongoose.model("Song", SongSchema)
-export const songModel = mongoose.model('Song') || mongoose.model('Song', SongSchema)
+export const songModel = mongoose.models.Song || mongoose.model("Song", SongSchema)
+// export const songModel = mongoose.model('Song') || mongoose.model('Song', SongSchema)
 
 // export interface Songs extends mongoose.Document{
 //     name: string

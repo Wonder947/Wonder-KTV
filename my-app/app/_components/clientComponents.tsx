@@ -49,7 +49,7 @@ export function DisplayTest({data2}:{data2: Array<IntSong>}){
             .then((value)=>{
                 setData(value)
             }).finally(()=>{
-                setTimeout(()=>setRefreshToken(Math.random()), 1)
+                setTimeout(()=>setRefreshToken(Math.random()), 1000)
             })
 
     }, [refreshToken])
