@@ -49,17 +49,21 @@ export function DisplayTest({data2}:{data2: Array<IntSong>}){
             .then((value)=>{
                 setData(value)
             }).finally(()=>{
-                setTimeout(()=>setRefreshToken(Math.random()), 1000)
+                setTimeout(()=>setRefreshToken(Math.random()), 1)
             })
 
     }, [refreshToken])
-    // const songs = data
+    function handleClick(){
+        console.log("!!!updating..")
+        updatePath('test')
+    }
 
     return (
         <>
             <ul >
                 {data.map((song)=>(<li key={song.id}>{song.name} <DeleteForm songId={song.id} /></li>))}
             </ul>
+            <button id='update2' onClick={handleClick}>Update</button>
         </>
     )
 }
