@@ -1,8 +1,9 @@
 'use server'
-import { songModel } from "@/lib/models"
-import '../lib/models'
+import { songModel } from "@/_copy/lib/models"
+import './models'
 import { revalidatePath } from "next/cache"
-import dbConnect from "@/lib/dbConnect"
+import dbConnect from "@/_copy/lib/dbConnect"
+import { redirect } from "next/dist/server/api-utils"
 
 export async function addSong(formData: FormData){
     await dbConnect()
@@ -47,6 +48,10 @@ export const fetcher = async (modelName: string) => {
     const res = await model.find()
     const data = res.map((raw)=>({id: raw._id.toString(), name: raw.name}))
     return data
+}
+
+export async function guestStart(){
+    
 }
 
 

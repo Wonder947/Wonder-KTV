@@ -154,6 +154,7 @@ An Example History with Embedded Record:
     * I'm going to be using YoutubeApi for video search and video playing
     * to integrate it, i need to understand what are they, how they work, and how to use them
     * i need to design my app carefully to reduce api calls by find some way to save the data internally
+    * explored PlaylistItems, IFrame APIs
 * (6 points) Explore React.js and Next.js
     * explore react.js and Next.js functionalities
     * I'm going to build my full-stack app solely on Next.js
@@ -176,4 +177,5 @@ An Example History with Embedded Record:
 1. [tutorial on React.js](https://react.dev/learn)
 2. [form tutorial on Next.js App router](https://nextjs.org/docs/app/building-your-application/data-fetching/forms-and-mutations)
 3. [tutorial on Next.js + App router + Mongodb + User Rego and login with example](https://jasonwatmore.com/next-js-13-app-router-mongodb-user-rego-and-login-tutorial-with-example)
+4. [npm react-youtube](https://www.npmjs.com/package/react-youtube)
 

@@ -1,9 +1,9 @@
 
 import '../../lib/models'
 import { songModel } from '../../lib/models'
-import { addSong } from '../actions'
-import dbConnect from '@/lib/dbConnect'
-import { DisplayData, DisplayTest } from '../_components/clientComponents'
+import { addSong } from '../../lib/actions'
+import dbConnect from '@/_copy/lib/dbConnect'
+import { DisplayData, DisplayTest } from '../../lib/clientComponents'
 // import { Display } from '../_components/clientComponents'
 
 

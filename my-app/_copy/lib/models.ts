@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import dbConnect from "@/lib/dbConnect";
+import dbConnect from "@/_copy/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
 dbConnect()

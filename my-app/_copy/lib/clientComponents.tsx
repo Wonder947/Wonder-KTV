@@ -1,18 +1,18 @@
 'use client'
 
-import { deleteSong, refresh } from "../actions"
-import { IntSong } from "@/lib/models"
-import { updatePath } from "../actions"
+import { deleteSong, refresh } from "./actions"
+import { IntSong } from "@/_copy/lib/models"
+import { updatePath } from "./actions"
 
 import useSWR from "swr"
-import { fetcher } from "../actions"
+import { fetcher } from "./actions"
 import Script from "next/script"
 import { revalidatePath } from "next/cache"
 import { useState } from "react"
 import { useEffect } from "react"
-import { retrieveData } from "../actions"
-import { songModel } from "@/lib/models"
-import dbConnect from "@/lib/dbConnect"
+import { retrieveData } from "./actions"
+import { songModel } from "@/_copy/lib/models"
+import dbConnect from "@/_copy/lib/dbConnect"
 
 export function DeleteForm({songId}:{songId:string}){
 
@@ -84,4 +84,6 @@ export function DisplayTest({data2}:{data2: Array<IntSong>}){
 //         </div>
 //     )
 // }
+
+
 
