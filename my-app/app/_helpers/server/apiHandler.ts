@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { jwtMiddleware } from "./jwt-middleware"
+import { errorHandler } from "./errorHandler"
 
 
 export function apiHandler(handler: any){
@@ -29,8 +30,8 @@ export function apiHandler(handler: any){
             }
             catch (err: any){
                 // global error handler
-                // return errorHandler(err)
                 console.log(err)
+                return errorHandler(err)
             }
         }
     })

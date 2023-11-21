@@ -11,7 +11,8 @@ async function getCurrent(){
     try{
         const currentUserId = headers().get('userId')
         console.log('current user id', currentUserId)
-        return await db.User.findById(currentUserId)
+        const res = await db.User.findById(currentUserId)
+        return res
     }
     catch{
         console.log('current user not found')
