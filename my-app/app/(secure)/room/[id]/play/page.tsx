@@ -1,9 +1,6 @@
-// import
 
-import Script from "next/script"
-import YouTube from "react-youtube"
 import { YouTubeEmbed } from "@next/third-parties/google"
-import YoutubeEmbed from "./helper"
+// import YoutubeEmbed from "./helper"
 
 export function YTPlayer(){
     const params = {
@@ -36,7 +33,10 @@ export function YTPlayer(){
 export default function page(){
 
     // return <YTPlayer />
-    return <YoutubeEmbed videoId={"PL713zo-5YI"}/>
+    // return <YoutubeEmbed videoId={"PL713zo-5YI"}/>
+    return (
+        <h1>To be done</h1>
+    )
 }
 
 
