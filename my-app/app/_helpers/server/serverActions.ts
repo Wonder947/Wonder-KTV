@@ -27,6 +27,6 @@ export async function updatePath(p: string){
 }
 
 export async function deleteSong(formData: FormData){
-    db.Song.findByIdAndDelete(formData.get('songid'))
+    await db.Song.findByIdAndDelete(formData.get('songid'))
     revalidatePath('/search')
 }
