@@ -2,6 +2,8 @@
 
 import { revalidatePath } from "next/cache"
 import { db } from "./db"
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 export async function addSong(formData: FormData){
     // await dbConnect()
@@ -29,4 +31,20 @@ export async function updatePath(p: string){
 export async function deleteSong(formData: FormData){
     await db.Song.findByIdAndDelete(formData.get('songid'))
     revalidatePath('/search')
+}
+
+
+// helper functions
+export async function authenticate({username, password}: {username: string, password: string}){
+    const user = await db.User.findOne({username})
+    if (!(user && bcrypt.compareSync(password, user.hash))){
+        throw 'Username or password is incorrect'
+    }
+    // create a jwt token that is valid for 10 days
+    const token = jwt.sign({sub: user.id}, process.env.JWT_SECRET!, {expiresIn: '10d'})
+
+    return {
+        user: user.toJSON(),
+        token
+    }
 }
