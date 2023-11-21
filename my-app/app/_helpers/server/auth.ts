@@ -1,5 +1,26 @@
+import { cookies } from "next/headers"
+import jwt from 'jsonwebtoken'
 
 
-export function 
+export const auth = {
+    isAuthenticated,
+    verifyToken
+}
 
+function isAuthenticated(){
+    try{
+        verifyToken()
+        return true
+    }
+    catch{
+        return false
+    }
+}
+
+function verifyToken(){
+    const token = cookies().get('auth')?.value ?? ''
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!)
+    const id = decoded.sub as string
+    return id
+}
 

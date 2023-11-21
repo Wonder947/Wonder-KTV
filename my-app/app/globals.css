@@ -17,3 +17,35 @@ button{
     border: none;
     border-radius: 6px;
 }
+
+a{
+    text-decoration: none;
+}
+
+#start-page a{
+    display: inline-block;
+    background-color: lightblue;
+    border-radius: 20%;
+    margin-inline: 20px;
+    padding: 10px;
+}
+
+.other-side{
+    margin-left: 20%;
+}
+
+.sidebar{
+    position: fixed;
+    height: 100vh;
+    width: 15%;
+    left:  0;
+    top: 0;
+    background-color: antiquewhite;
+    padding-top: 30px;
+}
+
+.sidebar a{
+    display: block;
+    padding: 5%;
+    padding-left: 10%;
+}
