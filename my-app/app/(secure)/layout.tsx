@@ -11,7 +11,7 @@ export default function Layout({children}: {children: React.ReactNode}){
     }
 
 
-    const sidebarEles = [<LogoutBtn />]
+    const sidebarEles = [<LogoutBtn key={'logout-btn-secureLayout'}/>]
 
     return (
         <>

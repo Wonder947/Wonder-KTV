@@ -49,3 +49,7 @@ a{
     padding: 5%;
     padding-left: 10%;
 }
+
+.logout-btn{
+    color: chocolate;
+}
