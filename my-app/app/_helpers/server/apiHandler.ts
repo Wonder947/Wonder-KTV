@@ -29,8 +29,8 @@ export function apiHandler(handler: any){
                 return NextResponse.json(responseBody || {})
             }
             catch (err: any){
-                // global error handler
-                console.log(err)
+                // global api error handler
+                console.log('from apiHandler', err)
                 return errorHandler(err)
             }
         }

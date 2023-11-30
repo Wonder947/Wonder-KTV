@@ -1,14 +1,15 @@
 'use client'
-import Link from "next/link" 
 
-export function Sidebar({pathList}: {pathList: string[]}){
+
+export function Sidebar({elements}: {elements: any[]}){
+    // console.log('elements are', elements)
+
     return (
         <div className="sidebar">
-            {pathList.map((path)=>(
-                <Link key={path} href={`/${path}`}>{path}</Link>
+            {elements.map((ele)=>(
+                ele
             ))}
         </div>
     )
 }
-
 

@@ -11,7 +11,7 @@ const initialState = {
 const userStore = create<IUserStore>(()=>initialState)
 
 export function useUserService(): IUserService{
-    const fetch = useFetch()
+    const fetch2 = useFetch()
     const router = useRouter()
     const {users, user, currentUser} = userStore()
 
@@ -19,26 +19,27 @@ export function useUserService(): IUserService{
         currentUser,
         login: async (username, password)=>{
             try{
-                const currentUser = await fetch.post('/api/account/login', {username, password})
+                const currentUser = await fetch2.post('/api/account/login', {username, password})
                 userStore.setState({...initialState, currentUser})
                 router.push('/')
+                router.refresh() //this is added to prevent back button bugs
             }
             catch(error :any){
-                console.log('error:', error)
+                console.log('from login of useUserService', error)
             }
         },
         register: async (user)=>{
             try{
-                await fetch.post('/api/account/register', user)
+                await fetch2.post('/api/account/register', user)
                 router.push('/login')
             }
             catch(err: any){
-                console.log(err)
-            }
+                console.log(err, 'from useUserService')
+                }
         },
         getCurrent: async ()=>{
             if (!currentUser){
-                userStore.setState({currentUser: await fetch.get('api/users/current')})
+                userStore.setState({currentUser: await fetch2.get('api/users/current')})
             }
         }
     }

@@ -1,3 +1,5 @@
+import LogoutBtn from "@/_components/LogoutBtb";
+import { Sidebar } from "@/_components/Sidebar";
 import { auth } from "@/_helpers/server/auth";
 import { redirect } from "next/navigation";
 
@@ -8,10 +10,15 @@ export default function Layout({children}: {children: React.ReactNode}){
         redirect('/start')
     }
 
+
+    const sidebarEles = [<LogoutBtn />]
+
     return (
         <>
-            <p>note: currently u need to delete the auth cookie to logout manually</p>
-            {children}
+            <Sidebar elements={sidebarEles} />
+            <div className="other-side">
+                {children}
+            </div>
         </>
     )
 }

@@ -6,8 +6,6 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 export async function addSong(formData: FormData){
-    // await dbConnect()
-    // const song = songModel
     const Song = db.Song
     const songDoc = new Song({
         name: formData.get("song")

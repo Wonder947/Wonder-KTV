@@ -23,8 +23,8 @@ register.schema = joi.object({
 async function createUser({username, password}: any){
     // validate username being unique
     if (await db.User.findOne({username})){
-        console.log('username exists already', username)
-        throw 'Username' + username + 'is already taken'
+        // console.log('username exists already', username)
+        throw 'Username ' + username + ' is already taken'
     }
     // register to the db
     const hash = bcrypt.hashSync(password, 10)

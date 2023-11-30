@@ -1,6 +1,5 @@
+'use client'
 import { useRouter } from "next/navigation"
-
-
 
 
 export function useFetch(){
@@ -30,6 +29,10 @@ export function useFetch(){
         const data = isJson ? await response.json() : null
 
         // check for error response...
+        if (!response.ok){
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error)
+        }
 
         return data
     }
