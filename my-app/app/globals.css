@@ -51,5 +51,6 @@ a{
 }
 
 .logout-btn{
-    color: chocolate;
+    position: absolute;
+    bottom: 10%;
 }

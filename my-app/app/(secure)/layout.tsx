@@ -1,6 +1,7 @@
 import LogoutBtn from "@/_components/LogoutBtb";
 import { Sidebar } from "@/_components/Sidebar";
 import { auth } from "@/_helpers/server/auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 
@@ -10,8 +11,12 @@ export default function Layout({children}: {children: React.ReactNode}){
         redirect('/start')
     }
 
-
-    const sidebarEles = [<LogoutBtn key={'logout-btn-secureLayout'}/>]
+    const sidebarEles = [
+        <Link key={'home-page'} href={'/'}>Home Page</Link>,
+        <Link key={'search-link'} href={'/search'}>Search</Link>,
+        <Link key={'the hall'} href={'/room'}>Rooms</Link>,
+        <LogoutBtn key={'logout-btn-secureLayout'}/>
+    ]
 
     return (
         <>
