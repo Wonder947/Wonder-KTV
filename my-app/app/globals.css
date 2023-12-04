@@ -54,3 +54,15 @@ a{
     position: absolute;
     bottom: 10%;
 }
+
+.join-link{
+    display: inline-block;
+    border-radius: 8px;
+    background-color: lightblue;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin: 10px;
+    text-decoration: none;
+}

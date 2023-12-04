@@ -1,6 +1,7 @@
 'use client'
 import { useFetch } from "@/_helpers/client/useFetch"
 import { createNewRoom, getRooms } from "@/_helpers/server/serverActions"
+import Link from "next/link"
 import { useEffect, useState, useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Socket, io } from "socket.io-client"
@@ -88,7 +89,8 @@ function RoomInfo({room}: {room: any}){
 
     return (
         <div>
-            <p>{room.name}</p>
+            {room.name}
+            <Link className="join-link" href={`/room/${room.id}`}>join</Link>
         </div>
     )
 }

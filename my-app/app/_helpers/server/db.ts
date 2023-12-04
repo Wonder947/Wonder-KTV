@@ -29,21 +29,36 @@ function userModel(){
 
 function songModel(){
     const schema = new Schema({
-        name: {type: String, required: true}
+        name: {type: String, required: true},
+        ytVideoId: {type: String, required: true}
     },{
         timestamps: true
     })
 
     schema.set('toJSON', {
-        virtuals: true
+        virtuals: true,
+        versionKey: false,
+        transform: function (doc, ret){
+            ret.id = ret._id.toString()
+            delete ret._id
+            delete ret.__v
+        }
     })
 
     return mongoose.models.Song || mongoose.model('Song', schema)
 }
 
 function roomModel(){
+    const subSchema = new Schema({
+        songId: {type: String, required: true},
+        songName: {type: String, required: true},
+        addedTime: {type: Number, required: true}
+    })
+
     const schema = new Schema({
-        name: {type: String, required: true}
+        name: {type: String, required: true},
+        memberNames: {type: [String], required: true},
+        songList: {type: [subSchema], required: true}
     }, {
         timestamps: true
     })
@@ -55,6 +70,16 @@ function roomModel(){
             ret.id = ret._id.toString()
             delete ret._id
             delete ret.__v
+            if (ret.songList.length!=0){
+                ret.songList = ret.songList.map((song: any)=>{
+                    return {
+                        songId: song.songId,
+                        songName: song.songName,
+                        addedTime: song.addedTime,
+                        id: song._id.toString()
+                    }
+                })
+            }
         }
     })
 
