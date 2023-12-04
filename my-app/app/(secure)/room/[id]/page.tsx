@@ -18,8 +18,8 @@ export default function Page({params}: {params: {id: string}}){
         getRoomInfo(roomId).then(setRoomInfo)
 
         // socket set up
-        socketRef.current = io('http://localhost:3001')
-        // const socket = io('https://wonder-ktv-websocket-server-fa65d400d2bd.herokuapp.com/')
+        // socketRef.current = io('http://localhost:3001')
+        socketRef.current = io('https://wonder-ktv-websocket-server-fa65d400d2bd.herokuapp.com/')
         socketRef.current.on('connect', ()=>{
             console.log(socketRef.current!.id, 'connected')
             socketRef.current!.emit('greeting', 'hello!!!!!!!!!!')
