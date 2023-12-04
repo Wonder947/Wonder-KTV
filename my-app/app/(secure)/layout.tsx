@@ -13,7 +13,6 @@ export default function Layout({children}: {children: React.ReactNode}){
 
     const sidebarEles = [
         <Link key={'home-page'} href={'/'}>Home Page</Link>,
-        <Link key={'search-link'} href={'/search'}>Search</Link>,
         <Link key={'the hall'} href={'/room'}>Rooms</Link>,
         <LogoutBtn key={'logout-btn-secureLayout'}/>
     ]

@@ -1,9 +1,9 @@
 'use client'
 import MemberList from '@/_components/MemberList'
 import { addSongToRoom, deleteSongFromRoom, getRoomInfo } from '@/_helpers/server/serverActions'
-import { getSongByName, getSongFromYoutube } from '@/_helpers/server/songActions'
 import {useState, useEffect, useRef} from 'react'
 import { useForm } from 'react-hook-form'
+import YouTube, {YouTubeProps} from 'react-youtube'
 import { Socket, io } from 'socket.io-client'
 
 
@@ -13,6 +13,17 @@ export default function Page({params}: {params: {id: string}}){
     const roomId = params.id
     const [roomInfo, setRoomInfo] = useState<Room>()
     const socketRef = useRef<Socket | null>(null)
+    const [curVideoId, setCurVideoId] = useState()
+    const opts: YouTubeProps['opts'] = {
+        height: '390',
+        width: '640',
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+          autoplay: 1,
+          controls: 0,
+          rel: 0,
+        },
+      };
 
     useEffect(()=>{
         getRoomInfo(roomId).then(setRoomInfo)
@@ -50,6 +61,13 @@ export default function Page({params}: {params: {id: string}}){
 
     }, [])
 
+    useEffect(()=>{
+        const newVideoId = roomInfo?.songList[0]?.ytVideoId
+        if (newVideoId!=curVideoId){
+            setCurVideoId(newVideoId)
+        }
+        console.log("new video id", newVideoId)
+    }, [roomInfo])
 
 
     return (
@@ -58,6 +76,7 @@ export default function Page({params}: {params: {id: string}}){
             <Chatpot />
             <MemberList members={roomInfo?.members} />
             <SongList songList={roomInfo?.songList} socketRef={socketRef} roomId={roomId} />
+            { curVideoId ? <YouTube videoId={curVideoId} opts={opts} /> : null }
         </>
     )
 }

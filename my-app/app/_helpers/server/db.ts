@@ -52,7 +52,8 @@ function roomModel(){
     const subSchema = new Schema({
         songId: {type: String, required: true},
         songName: {type: String, required: true},
-        addedTime: {type: Number, required: true}
+        addedTime: {type: Number, required: true},
+        ytVideoId: {type: String, required: true}
     })
 
     const schema = new Schema({
@@ -76,7 +77,8 @@ function roomModel(){
                         songId: song.songId,
                         songName: song.songName,
                         addedTime: song.addedTime,
-                        id: song._id.toString()
+                        id: song._id.toString(),
+                        ytVideoId: song.ytVideoId
                     }
                 })
             }

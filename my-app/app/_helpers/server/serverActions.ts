@@ -82,7 +82,7 @@ export async function addSongToRoom(songName: string, roomId: string){
     let song = await getSongByName(songName)
     song = song.toJSON()
     const addedTime = new Date().getTime()/1000
-    room.songList.push({songId:song.id, songName:song.name, addedTime: addedTime})
+    room.songList.push({songId:song.id, songName:song.name, addedTime: addedTime, ytVideoId: song.ytVideoId})
     await room.save()
 }
 
