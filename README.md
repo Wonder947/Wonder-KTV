@@ -151,22 +151,20 @@ An Example History with Embedded Record:
 ## Research Topics
 
 * (2 points) Integrate YoutubeAPI
-    * I'm going to be using YoutubeApi for video search and video playing
-    * to integrate it, i need to understand what are they, how they work, and how to use them
-    * i need to design my app carefully to reduce api calls by find some way to save the data internally
+    * use YoutubeApi for video search and video playing
+    * understand what are they, how they work, and how to use them
+    * design my app carefully to reduce api calls by find some way to save the data internally
     * explored PlaylistItems, IFrame APIs
 * (6 points) Explore React.js and Next.js
     * explore react.js and Next.js functionalities
-    * I'm going to build my full-stack app solely on Next.js
-    * this requiring self learning React.js, Next.js using App router, some Typescript
-    * as well as the overall understanding of Next.js
-    * which takes me a great amount of time, worthing 6 points
-* (2 points) Deploy on Vervel
-  * I explore the deployment procedure, and get my app deployed on Vercel
-  * I get a domain of my own and redirect my vercel deployment to that (ktv.wonder947.com)
-* (TBD: 2 points) Perform client-side form validation
-    * this is repeated as the example, and maybe i will try it
-* (tbd) Explore some other libraries
+    * this requiring self learning React.js, Next.js using App router, Typescript
+    * its workflow of api, middleware, websocket, etc. are greatly different from express learned in class
+    * without a traditional server, but a serverless function, it bring a lot of difficulty in different ways
+    * worthing 6 points
+* (2 points) Deployment with Vercel and Heroku
+  * explored the deployment procedure
+  * get a domain of my own, ktv.wonder947.com, and deployed the major body of my app to it with vercel
+  * to integrate with Web Socket, I create a separate server for hosting web socket server, which is deployed to Heroku
 
 
 ## [Link to Initial Main Project File](app.mjs) 
