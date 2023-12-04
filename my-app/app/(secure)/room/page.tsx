@@ -1,41 +1,96 @@
 'use client'
-import { useEffect } from "react"
-import { io } from "socket.io-client"
+import { useFetch } from "@/_helpers/client/useFetch"
+import { createNewRoom, getRooms } from "@/_helpers/server/serverActions"
+import { useEffect, useState, useRef } from "react"
+import { useForm } from "react-hook-form"
+import { Socket, io } from "socket.io-client"
 
 export default function Page(){
-
-    const socket = io('http://localhost:3001')
+    const [rooms, setRooms] = useState<{id: string, name: string}[]>([])
+    const fetch = useFetch()
+    const {register, handleSubmit, formState} = useForm()
+    const socketRef = useRef<Socket>()
+    
 
     useEffect(()=>{
-        // const socket = io('wss://localhost:3001')
+        // get rooms
+        getRooms().then(setRooms).catch(err=>console.log(err))
 
-        socket.on('connection', ()=>{
-            console.log(socket.id)
-            socket.emit('greeting', 'hello!!!!!!!!!!')
+        // connect to server to get real time notification
+        socketRef.current = io('http://localhost:3001')
+        // const socket = io('https://wonder-ktv-websocket-server-fa65d400d2bd.herokuapp.com/')
+
+        socketRef.current.on('connect', ()=>{
+            console.log(socketRef.current!.id, 'connected')
+            socketRef.current!.emit('greeting', 'hello!!!!!!!!!!')
+            // join to the hall
+            socketRef.current!.emit('join', 'hall')
+        })
+
+        socketRef.current.on('test', ()=>console.log('test success'))
+
+        socketRef.current.on('updateRoomList', async ()=>{
+            // const data = await fetch.get('/api/rooms')
+            console.log("updating room list")
+            const data = await getRooms()
+            setRooms(data)
+        })
+
+        socketRef.current.on('disconnect', ()=>{
+            console.log('disconnected')
         })
 
         return ()=>{
-            socket.disconnect()
+            socketRef.current!.disconnect()
         }
     }, [])
     
 
-    function handleClick(){
-    }
-
-    function handleChange(evt: any){
-        const tt = document.getElementById('ttext')
-        tt!.textContent = evt.target.value
-        // console.log(evt.target.value)
+    async function createRoom({roomname}: any){
+        await createNewRoom(roomname)
+        // use socket to remind server to broadcast to update the roomlist
+        socketRef.current!.emit('updateRoomList')
     }
 
     return (
         <>
             <h2>Welcome to the Hall</h2>
-            test1: <input name="test1" type="text" onChange={evt=>handleChange(evt)} />
-            <button onClick={handleClick}>Click</button>
-            <h4 id='ttext'></h4>
+            <h4>To Create a New Room</h4>
+            <form onSubmit={handleSubmit(createRoom)}>
+                <label className="form-label">Room Name</label>
+                <input type="text" {...register('roomname')} />
+                <button className="form-submit-button" disabled={formState.isSubmitting}>
+                    Create
+                </button>
+            </form>
+
+            <RoomList rooms={rooms} />
         </>
     )
 }
+
+
+// components defined below
+function RoomList({rooms}: {rooms: any}){
+
+    return (
+        <div>
+            <h4>Room List</h4>
+            {rooms ? rooms.map((room: any)=>
+                <RoomInfo key={room.id} room={room} />
+            ) : null}
+        </div>
+    )
+}
+
+function RoomInfo({room}: {room: any}){
+    console.log("room id", room.id)
+
+    return (
+        <div>
+            <p>{room.name}</p>
+        </div>
+    )
+}
+
 

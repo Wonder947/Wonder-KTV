@@ -25,7 +25,7 @@ export function useUserService(): IUserService{
                 router.refresh() //this is added to prevent back button bugs
             }
             catch(error :any){
-                console.log('from login of useUserService', error)
+                console.log(error, 'from userService login')
             }
         },
         register: async (user)=>{
@@ -34,13 +34,21 @@ export function useUserService(): IUserService{
                 router.push('/login')
             }
             catch(err: any){
-                console.log(err, 'from useUserService')
+                console.log(err, 'from useUserService register')
                 }
         },
         getCurrent: async ()=>{
-            if (!currentUser){
-                userStore.setState({currentUser: await fetch2.get('api/users/current')})
+            let fetchedUser
+            try{
+                fetchedUser = await fetch2.get('api/users/current')
+                if (!currentUser){
+                    userStore.setState({currentUser: fetchedUser})
+                }
+                // console.log("get current user:", fetchedUser)
+            }catch(err){
+                console.log(err, 'from userService getCurrent')
             }
+            return fetchedUser
         }
     }
 }

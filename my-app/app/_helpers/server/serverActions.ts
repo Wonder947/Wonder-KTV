@@ -46,3 +46,22 @@ export async function authenticate({username, password}: {username: string, pass
         token
     }
 }
+
+//rooms functions
+export async function createNewRoom(roomname: string){
+    const Room = db.Room
+    const newRoom = new Room({name: roomname})
+    await newRoom.save()
+    console.log("added new Room", newRoom.id)
+}
+
+export async function getRooms(){
+    const Room = db.Room
+    const rooms = await Room.find()
+    const result = rooms.map((room)=>{
+        return room.toJSON()
+    })
+    // console.log("rooms", result)
+    return result
+}
+
