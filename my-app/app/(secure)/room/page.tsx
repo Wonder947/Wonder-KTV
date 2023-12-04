@@ -18,8 +18,8 @@ export default function Page(){
         getRooms().then(setRooms).catch(err=>console.log(err))
 
         // connect to server to get real time notification
-        socketRef.current = io('http://localhost:3001')
-        // const socket = io('https://wonder-ktv-websocket-server-fa65d400d2bd.herokuapp.com/')
+        // socketRef.current = io('http://localhost:3001')
+        socketRef.current = io('https://wonder-ktv-websocket-server-fa65d400d2bd.herokuapp.com/')
 
         socketRef.current.on('connect', ()=>{
             console.log(socketRef.current!.id, 'connected')
