@@ -158,13 +158,15 @@ An Example History with Embedded Record:
 * (6 points) Explore React.js and Next.js
     * explore react.js and Next.js functionalities
     * this requiring self learning React.js, Next.js using App router, Typescript
-    * its workflow of api, middleware, websocket, etc. are greatly different from express learned in class
-    * without a traditional server, but a serverless function, it bring a lot of difficulty in different ways
+    * understanding serverless functions
+    * different kinds of hooks, like useEffect(), useRef(), useForm(), useState()
     * worthing 6 points
 * (2 points) Deployment with Vercel and Heroku
   * explored the deployment procedure
   * get a domain of my own, ktv.wonder947.com, and deployed the major body of my app to it with vercel
   * to integrate with Web Socket, I create a separate server for hosting web socket server, which is deployed to Heroku
+* (1 points) Explored other libraries
+  * explored zustand
 
 
 ## [Link to Initial Main Project File](app.mjs) 
