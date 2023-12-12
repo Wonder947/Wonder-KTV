@@ -3,9 +3,12 @@ import { db } from "@/_helpers/server/db";
 import { headers } from "next/headers";
 
 
-module.exports = apiHandler({
+// module.exports = apiHandler({
+//     GET: getCurrent
+// })
+export const GET = apiHandler({
     GET: getCurrent
-})
+}).GET
 
 async function getCurrent(){
     try{
