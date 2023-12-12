@@ -6,7 +6,7 @@ import {useState} from 'react'
 export default function Page(){
     const userService = useUserService()
     const {register, handleSubmit, formState} = useForm()
-    // const {errors} = formState
+    const {errors} = formState
 
     const [serverError, setServerError] = useState('')
 
@@ -18,6 +18,9 @@ export default function Page(){
             setServerError(e)
         }
     }
+    function clearError(){
+        serverError==='' ? null : setServerError('')
+    }
     
     return (
         <div>
@@ -25,11 +28,13 @@ export default function Page(){
             <form id="register-form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-input-container">
                     <label className="form-label">Username</label>
-                    <input type="text" {...register('username', {required: 'Username is required'})} />
+                    <input type="text" {...register('username', {required: 'Username is required', onChange: ()=>clearError()})} />
+                    <p className="form-error in-line">{errors.username?.message?.toString()}</p>
                 </div>
                 <div className="form-input-container">
                     <label className="form-label">Password</label>
-                    <input type="text" {...register('password', {required: 'Password is required'})} />
+                    <input type="text" {...register('password', {required: 'Password is required', onChange: ()=>clearError()})} />
+                    <p className="form-error in-line">{errors.password?.message?.toString()}</p>
                 </div>
                 <p className="form-error">{serverError}</p>
                 <button className="form-submit-button" disabled={formState.isSubmitting}>

@@ -24,6 +24,15 @@ a{
 
 .form-error{
     font-family: 'Times New Roman', Times, serif;
+    color: red;
+}
+
+.in-line{
+    display: inline;
+}
+
+.member-names{
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #start-page a{

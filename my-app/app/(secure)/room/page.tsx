@@ -25,7 +25,7 @@ export default function Page(){
             console.log(socketRef.current!.id, 'connected')
             socketRef.current!.emit('greeting', 'hello!!!!!!!!!!')
             // join to the hall
-            socketRef.current!.emit('join', 'hall')
+            socketRef.current!.emit('joinHall')
         })
 
         socketRef.current.on('test', ()=>console.log('test success'))

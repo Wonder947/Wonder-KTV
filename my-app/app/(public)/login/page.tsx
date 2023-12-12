@@ -18,6 +18,9 @@ export default function Page(){
             setServerErr(e)
         }
     }
+    function clearError(){
+        serverErr==='' ? null : setServerErr('')
+    }
 
     return (
         <div>
@@ -25,11 +28,11 @@ export default function Page(){
             <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-input-container">
                     <label className="form-label">Username</label>
-                    <input type="text" {...register('username')} />
+                    <input type="text" {...register('username', {onChange: ()=>clearError()})} />
                 </div>
                 <div className="form-input-container">
                     <label className="form-label">Password</label>
-                    <input type="text" {...register('password')} />
+                    <input type="text" {...register('password', {onChange: ()=>clearError()})} />
                 </div>
                 <p className="form-error">{serverErr}</p>
                 <button className="form-submit-button" disabled={formState.isSubmitting}>

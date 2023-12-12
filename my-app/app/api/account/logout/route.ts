@@ -13,4 +13,5 @@ const GET = apiHandler({
 
 async function logout(req: Request){
     cookies().delete('auth')
+    cookies().delete('uid')
 }

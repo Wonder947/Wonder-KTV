@@ -14,6 +14,7 @@ async function login(req: Request){
     const body = await req.json()
     const {user, token} = await authenticate(body)
     cookies().set('auth', token, {httpOnly: true})
+    cookies().set('uid', user.id, {httpOnly: false})
 
     return user
 }

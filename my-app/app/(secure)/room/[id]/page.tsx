@@ -1,5 +1,6 @@
 'use client'
 import MemberList from '@/_components/MemberList'
+import { getCookies } from '@/_helpers/client/cookieHelper'
 import { addSongToRoom, deleteSongFromRoom, getRoomInfo } from '@/_helpers/server/serverActions'
 import {useState, useEffect, useRef} from 'react'
 import { useForm } from 'react-hook-form'
@@ -10,10 +11,14 @@ import { Socket, io } from 'socket.io-client'
 // this page shall display room info, including room name, current users, and a chatpot
 // and also provide a form to display, add, delete, and order the room's song list
 export default function Page({params}: {params: {id: string}}){
+    const userId = getCookies(document.cookie).uid
     const roomId = params.id
     const [roomInfo, setRoomInfo] = useState<Room>()
     const socketRef = useRef<Socket | null>(null)
     const [curVideoId, setCurVideoId] = useState()
+    const [roomMemberNames, setRoomMemberNames] = useState<string[]>([])
+    
+    
     const opts: YouTubeProps['opts'] = {
         height: '390',
         width: '640',
@@ -29,29 +34,36 @@ export default function Page({params}: {params: {id: string}}){
         getRoomInfo(roomId).then(setRoomInfo)
 
         // socket set up
-        // socketRef.current = io('http://localhost:3001')
-        socketRef.current = io('https://wonder-ktv-websocket-server-fa65d400d2bd.herokuapp.com/')
+        // socketRef.current = io('http://localhost:3001', {autoConnect: false})
+        socketRef.current = io('https://wonder-ktv-websocket-server-fa65d400d2bd.herokuapp.com/', {autoConnect: false})
+
+        socketRef.current.auth = {uid: userId, rid: roomId}
+        socketRef.current.connect()
+
         socketRef.current.on('connect', ()=>{
             console.log(socketRef.current!.id, 'connected')
             socketRef.current!.emit('greeting', 'hello!!!!!!!!!!')
             // join the room by room id
-            socketRef.current!.emit('join', roomId)
+            socketRef.current!.emit('joinRoom', roomId)
             // remind server to broadcast update on new member of the room
             socketRef.current!.emit('requestUpdateRoomInfo', roomId)
         })
 
         socketRef.current.on('disconnect', ()=>{
             console.log('disconnected')
-            // remind server to broadcast update on member leave
-            socketRef.current!.emit('requestUpdateRoomInfo', roomId)
         })
 
         socketRef.current.on('test', ()=>console.log('test success'))
 
-        socketRef.current.on('updateRoomInfo', ()=>{
-            // update the room info
-            getRoomInfo(roomId).then(setRoomInfo)
-            console.log('updated roominfo')
+        socketRef.current.on('updateRoomInfo', async ()=>{
+            const newRoomInfo = await getRoomInfo(roomId)
+            setRoomInfo(newRoomInfo)
+            setRoomMemberNames(newRoomInfo.memberNames)
+            console.log("updated room info:", newRoomInfo)
+        })
+
+        socketRef.current.on('updateRoomMemberNames', (memberNames: string[])=>{
+            setRoomMemberNames(memberNames)
         })
 
 
@@ -74,7 +86,7 @@ export default function Page({params}: {params: {id: string}}){
         <>
             <h2>Welcome to room {roomInfo?.name}</h2>
             <Chatpot />
-            <MemberList members={roomInfo?.members} />
+            <MemberList memberNames={roomMemberNames} />
             <SongList songList={roomInfo?.songList} socketRef={socketRef} roomId={roomId} />
             { curVideoId ? <YouTube videoId={curVideoId} opts={opts} /> : null }
         </>
