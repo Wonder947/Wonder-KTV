@@ -3,9 +3,12 @@ import { authenticate } from "@/_helpers/server/serverActions"
 import joi from "joi"
 import {cookies} from "next/headers"
 
-module.exports = apiHandler({
+// module.exports = apiHandler({
+//     POST: login
+// })
+export const POST = apiHandler({
     POST: login
-})
+}).POST
 
 async function login(req: Request){
     const body = await req.json()

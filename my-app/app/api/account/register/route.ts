@@ -4,9 +4,17 @@ import joi from "joi"
 import bcrypt from "bcryptjs"
 
 
-module.exports = apiHandler({
+// module.exports = apiHandler({
+//     POST: register
+// })
+
+const POST = apiHandler({
     POST: register
-})
+}).POST
+
+export {
+    POST
+}
 
 async function register(req: Request){
     const body = await req.json()
