@@ -26,6 +26,7 @@ export function useUserService(): IUserService{
             }
             catch(error :any){
                 console.log(error, 'from userService login')
+                throw error
             }
         },
         register: async (user)=>{
@@ -35,6 +36,7 @@ export function useUserService(): IUserService{
             }
             catch(err: any){
                 console.log(err, 'from useUserService register')
+                throw err
                 }
         },
         getCurrent: async ()=>{

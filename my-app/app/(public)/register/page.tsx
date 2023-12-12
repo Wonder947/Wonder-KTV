@@ -1,15 +1,22 @@
 'use client'
 import {useForm} from "react-hook-form"
 import { useUserService } from "@/_services/useUserService"
-
+import {useState} from 'react'
 
 export default function Page(){
     const userService = useUserService()
     const {register, handleSubmit, formState} = useForm()
-    const {errors} = formState
+    // const {errors} = formState
+
+    const [serverError, setServerError] = useState('')
 
     async function onSubmit(user: any){
-        await userService.register(user)
+        try{
+            await userService.register(user)
+        }
+        catch(e: any){
+            setServerError(e)
+        }
     }
     
     return (
@@ -24,6 +31,7 @@ export default function Page(){
                     <label className="form-label">Password</label>
                     <input type="text" {...register('password', {required: 'Password is required'})} />
                 </div>
+                <p className="form-error">{serverError}</p>
                 <button className="form-submit-button" disabled={formState.isSubmitting}>
                     Register
                 </button>

@@ -22,6 +22,10 @@ a{
     text-decoration: none;
 }
 
+.form-error{
+    font-family: 'Times New Roman', Times, serif;
+}
+
 #start-page a{
     display: inline-block;
     background-color: lightblue;
