@@ -6,9 +6,17 @@ export function Sidebar({elements}: {elements: any[]}){
 
     return (
         <div className="sidebar">
-            {elements.map((ele)=>(
-                ele
-            ))}
+            {/* <div className="sidebar-header">Wonder KTV</div> */}
+            <a href="#" className="toggle-button">
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+            </a>
+            <div className="sidebar-links">
+                {elements.map((ele)=>(
+                    ele
+                ))}
+            </div>
         </div>
     )
 }

@@ -32,7 +32,7 @@ export default function Page(){
                 </div>
                 <div className="form-input-container">
                     <label className="form-label">Password</label>
-                    <input type="text" {...register('password', {onChange: ()=>clearError()})} />
+                    <input type="password" {...register('password', {onChange: ()=>clearError()})} />
                 </div>
                 <p className="form-error">{serverErr}</p>
                 <button className="form-submit-button" disabled={formState.isSubmitting}>

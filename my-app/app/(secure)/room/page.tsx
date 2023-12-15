@@ -48,9 +48,14 @@ export default function Page(){
     
 
     async function createRoom({roomname}: any){
-        await createNewRoom(roomname)
-        // use socket to remind server to broadcast to update the roomlist
-        socketRef.current!.emit('updateRoomList')
+        try{
+            await createNewRoom(roomname)
+            // use socket to remind server to broadcast to update the roomlist
+            socketRef.current!.emit('updateRoomList')
+        }
+        catch(e){
+            console.log("create room failed because", e)
+        }
     }
 
     return (

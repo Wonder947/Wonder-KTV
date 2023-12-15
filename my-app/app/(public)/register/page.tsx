@@ -33,7 +33,7 @@ export default function Page(){
                 </div>
                 <div className="form-input-container">
                     <label className="form-label">Password</label>
-                    <input type="text" {...register('password', {required: 'Password is required', onChange: ()=>clearError()})} />
+                    <input type="password" {...register('password', {required: 'Password is required', onChange: ()=>clearError()})} />
                     <p className="form-error in-line">{errors.password?.message?.toString()}</p>
                 </div>
                 <p className="form-error">{serverError}</p>

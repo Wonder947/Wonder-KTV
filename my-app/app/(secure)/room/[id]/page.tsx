@@ -116,11 +116,17 @@ function Chatpot(){
 function SongList({socketRef, roomId, songList}: {socketRef: React.RefObject<Socket | null>, roomId: string, songList: any}){
     const {register, handleSubmit, formState} = useForm()
     
-    async function addSong({songName}: any){
+    async function addSong({songName, original}: any){
+        // test
+        console.log('original?:', original)
         // add song by name to the room's playList
-        await addSongToRoom(songName, roomId)
-        // remind server socket to broadcast the update of the song list
-        socketRef.current!.emit('requestUpdateRoomInfo', roomId)
+       try {
+            await addSongToRoom(songName, roomId)
+            // remind server socket to broadcast the update of the song list
+            socketRef.current!.emit('requestUpdateRoomInfo', roomId)
+       } catch(e){
+        console.log("failed to add song because:", e)
+       }
     }
 
     function SongEntry({song}: {song: any}){
@@ -143,6 +149,8 @@ function SongList({socketRef, roomId, songList}: {socketRef: React.RefObject<Soc
             <form onSubmit={handleSubmit(addSong)}>
             <label className="form-label">add a song</label>
                 <input type="text" {...register('songName')} />
+                <input type='radio' {...register('original')} name='original' value={'original'} /> {'original'}
+                <input type='radio' {...register('original')} name='original' value={'accompanied'} /> {'accompanied'}
                 <button className="form-submit-button" disabled={formState.isSubmitting}>
                     Add
                 </button>
