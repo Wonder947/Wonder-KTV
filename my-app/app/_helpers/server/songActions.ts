@@ -9,15 +9,15 @@ import { db } from "./db"
 // else not found, search by name on youtube
 // save the youtube result into db
 // return that Song doc
-export async function getSongByName(name: string){
+export async function getSongByName(name: string, original: string){
     const Song = db.Song
-    const dbRes = await Song.find({name: name})
+    const dbRes = await Song.find({name: name}) // to be revised
     if (dbRes.length!=0){
         console.log('using database!!!!',dbRes[0])
         return dbRes[0]
     }
     // else get it from youtube
-    const ytResult = await getSongFromYoutube(name)
+    const ytResult = await getSongFromYoutube(name, original)
     // then save it to the db
     const song = new Song({
         name: name,
@@ -29,9 +29,10 @@ export async function getSongByName(name: string){
 }
 
 // input song name, return videoId
-export async function getSongFromYoutube(name: string){
+export async function getSongFromYoutube(name: string, original: string){
     const apiKey = process.env.YOUTUBE_API_KEY
-    const q = 'ktv伴奏'+name
+    const q = 'ktv' + (original==='original' ? '原唱 ' : '伴奏 ') + name
+    console.log("youtube query parameter is :", q)
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&key=${apiKey}`;
     let result
 

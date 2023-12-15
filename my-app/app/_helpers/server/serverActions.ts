@@ -75,11 +75,11 @@ export async function getRoomInfo(id: string){
     return result
 }
 
-export async function addSongToRoom(songName: string, roomId: string){
-    console.log('adding song:', songName, 'to room:', roomId)
+export async function addSongToRoom(songName: string, roomId: string, original: string){
+    console.log('adding song:', songName, 'to room:', roomId, 'original?:', original)
     const Room = db.Room
     const room = await Room.findById(roomId)
-    let song = await getSongByName(songName)
+    let song = await getSongByName(songName, original)
     song = song.toJSON()
     const addedTime = new Date().getTime()/1000
     room.songList.push({songId:song.id, songName:song.name, addedTime: addedTime, ytVideoId: song.ytVideoId})
